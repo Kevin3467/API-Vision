@@ -1,5 +1,8 @@
 from databaseApi import db
 
+
+
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     email = db.Column(db.Text, unique=True, nullable=False)
@@ -7,6 +10,9 @@ class User(db.Model):
 
 
 class Ctrl_contrato(db.Model):
+    __tablename__ = 'contrato'
+
+
     id = db.Column(db.Integer, primary_key = True, autoincrement=True )
     cntCodigo = db.Column(db.String(80), nullable = False )
     cntNome = db.Column(db.String(80), nullable = False )
@@ -15,6 +21,10 @@ class Ctrl_contrato(db.Model):
     cntDataInicio = db.Column(db.String(14), nullable = False)
     cntDataFim = db.Column(db.String(14), nullable = False)
 
+
+    chamados = db.relationship('Ctrl_chamados')
+
+    
     def to_json(self):
         return {
         'id': self.id,
@@ -28,36 +38,17 @@ class Ctrl_contrato(db.Model):
 
 
 
-
-class Ctrl_qqp(db.Model):
-    id = db.Column(db.Integer, primary_key = True, autoincrement=True )
-    qqpCodigo = db.Column(db.String(80), nullable = False )
-    idcnt = Ctrl_contrato.id
-    qqpItem = db.Column(db.String(80), nullable = False)
-    qqpDescricao = db.Column(db.String(80), nullable = False)
-    qqpQuantidade = db.Column(db.Integer, nullable = False)
-    qqpValor = db.Column(db.Integer, nullable = False)
-
-    def to_json(self):
-        return {
-        'id': self.id,
-        'qqpCodigo': self.qqpCodigo,
-        'idcnt': self.idcnt,
-        'qqpItem': self.qqpItem,
-        'qqpDescricao': self.qqpDescricao,
-        'qqpQuantidade': self.qqpQuantidade,
-        'qqpValor': self.qqpValor
-        }
-
-
-
-
 class Ctrl_clientes(db.Model):
+    __tablename__ = 'clientes'
+
+
     id = db.Column(db.Integer, primary_key = True, autoincrement=True )
     clnNome = db.Column(db.String(80), nullable = False )
     clnEmpresa = db.Column(db.String(80), nullable = False )
     clnTelefone = db.Column(db.String(80))
     clnEmail = db.Column(db.String(255))
+
+    chamados = db.relationship('Ctrl_chamados')
     
     def to_json(self):
         return {
@@ -69,9 +60,71 @@ class Ctrl_clientes(db.Model):
         }
 
 
+class Ctrl_coordenadores(db.Model):
+    __tablename__ = 'coordenadores'
+
+
+    id = db.Column(db.Integer, primary_key = True, autoincrement=True )
+    codNome = db.Column(db.String(80), nullable = False )
+    codEmpresa = db.Column(db.String(80), nullable = False )
+    codTelefone = db.Column(db.String(80))
+    codEmail = db.Column(db.String(255))
+
+    
+    chamados = db.relationship('Ctrl_chamados')
+    
+    def to_json(self):
+        return {
+        'id': self.id,
+        'nome': self.clnNome,
+        'empresa': self.clnEmpresa,
+        'telefone': self.clnTelefone,
+        'email': self.clnEmail
+        }
+
+
+class Ctrl_chamados(db.Model):
+    __tablename__ = 'chamados'
+
+
+    id = db.Column(db.Integer, primary_key = True, autoincrement=True )
+    idcnt = db.Column(db.Integer, db.ForeignKey('contrato.id'))
+    chmSolicitacao = db.Column(db.String(80), nullable = False)
+    chmTitulo = db.Column(db.String(255), nullable = False)
+    chmDescricao = db.Column(db.String(255), nullable = False)
+    idClientes = db.Column(db.Integer, db.ForeignKey('clientes.id'))
+    idCoordenador = db.Column(db.Integer, db.ForeignKey('coordenadores.id'))
+    chmVisita = db.Column(db.String(14))
+    chmEmissão = db.Column(db.String(14))
+    chmAprovação = db.Column(db.String(14))
+    chmEntrega = db.Column(db.String(14))
+    chmArquivamento = db.Column(db.String(14))
+
+
+    escopo = db.relationship('Ctrl_escopo')
+
+    def to_json(self):
+        return {
+        'id': self.id,
+        'idcnt': self.idcnt,
+        'chmSolicitacao': self.chmSolicitacao,
+        'chmTitulo': self.chmTitulo,
+        'chmDescricao': self.chmDescricao,
+        'idClientes': self.idClientes,
+        'idCoordenador': self.idCoordenador,
+        'chmVisita': self.chmVisita,
+        'chmEmissão': self.chmEmissão,
+        'chmAprovação': self.chmAprovação,
+        'chmEntrega': self.chmEntrega,
+        'chmArquivamento': self.chmArquivamento,
+        }
+
+
 
 
 class Ctrl_colaboradores(db.Model):
+    __tablename__ = 'colaboradores'
+
     id = db.Column(db.Integer, primary_key = True, autoincrement=True)
     clbNome = db.Column(db.String(80), nullable = False)
     clbCPFouCNPJ = db.Column(db.Integer, nullable = False)
@@ -95,7 +148,11 @@ class Ctrl_colaboradores(db.Model):
 
 
 class Ctrl_escopo(db.Model):
+    __tablename__ = 'escopo'
+
+
     id = db.Column(db.Integer, primary_key = True, autoincrement=True )
+    idchamado = db.Column(db.Integer, db.ForeignKey('chamados.id'))
     escEscopo = db.Column(db.String(3000), nullable = False)
     escForaDeEscopo = db.Column(db.String(3000), nullable = False)
     escObjetivo = db.Column(db.String(3000), nullable = False)
@@ -106,6 +163,7 @@ class Ctrl_escopo(db.Model):
     def to_json(self):
         return {
         'id': self.id,
+        'idchamado': self.idchamado,
         'escEscopo': self.escEscopo,
         'escForaDeEscopo': self.escForaDeEscopo,
         'escSituacaoAtual': self.escSituacaoAtual,
@@ -114,33 +172,27 @@ class Ctrl_escopo(db.Model):
         }
 
 
-class Ctrl_chamados(db.Model):
+
+
+
+class Ctrl_qqp(db.Model):
+    __tablename__ = 'qqp'
+
     id = db.Column(db.Integer, primary_key = True, autoincrement=True )
-    idesc = Ctrl_escopo.id
+    qqpCodigo = db.Column(db.String(80), nullable = False )
     idcnt = Ctrl_contrato.id
-    chmSolicitacao = db.Column(db.String(80), nullable = False)
-    chmTitulo = db.Column(db.String(255), nullable = False)
-    chmDescricao = db.Column(db.String(255), nullable = False)
-    idClientes = Ctrl_clientes.id
-    idCoordenador = Ctrl_clientes.id
-    chmVisita = db.Column(db.String(14))
-    chmEmissão = db.Column(db.String(14))
-    chmAprovação = db.Column(db.String(14))
-    chmEntrega = db.Column(db.String(14))
-    chmArquivamento = db.Column(db.String(14) )
+    qqpItem = db.Column(db.String(80), nullable = False)
+    qqpDescricao = db.Column(db.String(80), nullable = False)
+    qqpQuantidade = db.Column(db.Integer, nullable = False)
+    qqpValor = db.Column(db.Integer, nullable = False)
 
     def to_json(self):
         return {
         'id': self.id,
+        'qqpCodigo': self.qqpCodigo,
         'idcnt': self.idcnt,
-        'chmSolicitacao': self.chmSolicitacao,
-        'chmTitulo': self.chmTitulo,
-        'chmDescricao': self.chmDescricao,
-        'idClientes': self.idClientes,
-        'idCoordenador': self.idCoordenador,
-        'chmVisita': self.chmVisita,
-        'chmEmissão': self.chmEmissão,
-        'chmAprovação': self.chmAprovação,
-        'chmEntrega': self.chmEntrega,
-        'chmArquivamento': self.chmArquivamento,
+        'qqpItem': self.qqpItem,
+        'qqpDescricao': self.qqpDescricao,
+        'qqpQuantidade': self.qqpQuantidade,
+        'qqpValor': self.qqpValor
         }

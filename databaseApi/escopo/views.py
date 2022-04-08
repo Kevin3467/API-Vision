@@ -44,6 +44,7 @@ def CriaEscopo():
     body = request.get_json()
     try:
         newescopo = Ctrl_escopo(
+            idchamado = body["idchamado"],
             escEscopo= body["escEscopo"],
             escObjetivo= body["escObjetivo"],
             escForaDeEscopo= body["escForaDeEscopo"],
@@ -71,6 +72,8 @@ def AtualizaEscopo(id):
     body = request.get_json()
 
     try:
+        if('idchamado' in body):
+            escopo_objeto.idchamado = body['idchamado']
         if('escEscopo' in body):
             escopo_objeto.escEscopo = body['escEscopo']
         if('escObjetivo' in body):
@@ -83,11 +86,12 @@ def AtualizaEscopo(id):
             escopo_objeto.escPremissas = body['escPremissas']
         if('escFornecimentos' in body):
             escopo_objeto.escFornecimentos = body['escFornecimentos']
-            
-        
+
+
         db.session.add(escopo_objeto)
         db.session.commit()
         return gera_response(200, "escopo", escopo_objeto.to_json(), "Atualizado com sucesso")
+
 
 
     except Exception as e:
