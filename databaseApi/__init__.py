@@ -4,7 +4,7 @@ from flask_jwt_extended import (JWTManager)
 
 app = Flask(__name__, template_folder='.')
 db = SQLAlchemy(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://gicnsnsixmbhqs:2fa8fe4eb2f869061d5adecee9d2ba09dafdb5386ea6a52ac1fdb701c17227c3@ec2-52-70-186-184.compute-1.amazonaws.com:5432/dfnhlth983shho'
 app.config['JWT_SECRET_KEY'] = '!0projetacsVision'
 jwt = JWTManager(app)
 
