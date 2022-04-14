@@ -17,7 +17,7 @@ def Escopos():
     escopo_json = [escopo.to_json() for escopo in escopo_obj]
 
 
-    return gera_response(200, "escopos", escopo_json)
+    return gera_response(200, escopo_json)
 
 
 
@@ -30,7 +30,7 @@ def Escopo(id):
     escopo_json = escopo_obj.to_json()
 
 
-    return gera_response(200, "escopo", escopo_json)
+    return gera_response(200, escopo_json)
 
 
 
@@ -57,7 +57,7 @@ def CriaEscopo():
         return gera_response(201, "escopo", newescopo.to_json(), "Criado com sucesso")
     except Exception as e:
         print('Erro', e)
-        return gera_response(400, "escopo", {}, "Erro ao cadastrar")
+        return gera_response(400, {}, "Erro ao cadastrar")
 
     return Response()
 
@@ -90,13 +90,13 @@ def AtualizaEscopo(id):
 
         db.session.add(escopo_objeto)
         db.session.commit()
-        return gera_response(200, "escopo", escopo_objeto.to_json(), "Atualizado com sucesso")
+        return gera_response(200, escopo_objeto.to_json(), "Atualizado com sucesso")
 
 
 
     except Exception as e:
         print('Erro', e)
-        return gera_response(400, "escopo", {}, "Erro ao atualizar")
+        return gera_response(400, {}, "Erro ao atualizar")
 
 
 # Deletar
@@ -111,4 +111,4 @@ def deleta_cliente(id):
         return gera_response(200, "escopo", escopo_objeto.to_json(), "Deletado com sucesso")
     except Exception as e:
         print('Erro', e)
-        return gera_response(400, "escopo", {}, "Erro ao deletar")
+        return gera_response(400, {}, "Erro ao deletar")

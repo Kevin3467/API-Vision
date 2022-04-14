@@ -19,7 +19,7 @@ def Clientes():
     clientes_json = [cliente.to_json() for cliente in clientes_obj]
     
 
-    return gera_response(200, "clientes", clientes_json)
+    return gera_response(200, clientes_json)
 
 
 
@@ -33,7 +33,7 @@ def Cliente(id):
     cliente_json = cliente_obj.to_json()
 
 
-    return gera_response(200, "cliente", cliente_json)
+    return gera_response(200, cliente_json)
 
 
 # create clientes
@@ -55,7 +55,7 @@ def CriaCliente():
         return gera_response(201, "cliente", newcliente.to_json(), "Criado com sucesso")
     except Exception as e:
         print('Erro', e)
-        return gera_response(400, "cliente", {}, "Erro ao cadastrar")
+        return gera_response(400, {}, "Erro ao cadastrar")
 
     return Response()
 
@@ -82,12 +82,12 @@ def AtualizaCliente(id):
         
         db.session.add(cliente_objeto)
         db.session.commit()
-        return gera_response(200, "cliente", cliente_objeto.to_json(), "Atualizado com sucesso")
+        return gera_response(200, cliente_objeto.to_json(), "Atualizado com sucesso")
 
 
     except Exception as e:
         print('Erro', e)
-        return gera_response(400, "cliente", {}, "Erro ao atualizar")
+        return gera_response(400, {}, "Erro ao atualizar")
 
 
 
@@ -103,6 +103,6 @@ def deleta_cliente(id):
         return gera_response(200, "cliente", cliente_objeto.to_json(), "Deletado com sucesso")
     except Exception as e:
         print('Erro', e)
-        return gera_response(400, "cliente", {}, "Erro ao deletar")
+        return gera_response(400, {}, "Erro ao deletar")
 
 
