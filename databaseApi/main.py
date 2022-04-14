@@ -7,9 +7,9 @@ import json
 def Index():
     return render_template('index.html')
 
-def gera_response(status, nome_do_conteudo, conteudo, mensagem=False):
+def gera_response(status, conteudo, mensagem=False):
     body = {}
-    body[nome_do_conteudo] = conteudo
+    body = conteudo
 
     if(mensagem):
         body["mensagem"] = mensagem

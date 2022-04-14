@@ -60,6 +60,26 @@ class Ctrl_clientes(db.Model):
         }
 
 
+class Ctrl_orcamentos(db.Model):
+    __tablename__ = 'orcamentos'
+
+
+    id = db.Column(db.Integer, primary_key = True, autoincrement=True )
+    orcnome = db.Column(db.String(80), nullable = False )
+    orcdescricao = db.Column(db.String(80), nullable = False )
+    orccodigo = db.Column(db.String(80))
+
+    
+    def to_json(self):
+        return {
+        'id': self.id,
+        'nome': self.orcnome,
+        'Descricao': self.orcdescricao,
+        'Codigo': self.orccodigo
+        }
+
+
+
 class Ctrl_coordenadores(db.Model):
     __tablename__ = 'coordenadores'
 

@@ -18,4 +18,7 @@ from databaseApi.auth.views import auth
 app.register_blueprint(auth)
 from databaseApi.escopo.views import escopo
 app.register_blueprint(escopo)
+from databaseApi.orcamento.views import orcamento
+app.register_blueprint(orcamento)
+
 
