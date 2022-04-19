@@ -74,8 +74,8 @@ class Ctrl_orcamentos(db.Model):
         return {
         'id': self.id,
         'nome': self.orcnome,
-        'Descricao': self.orcdescricao,
-        'Codigo': self.orccodigo
+        'descricao': self.orcdescricao,
+        'codigo': self.orccodigo
         }
 
 

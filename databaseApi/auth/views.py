@@ -6,6 +6,7 @@ from flask_jwt_extended import (
     create_access_token,
     get_jwt_identity
 )
+from flask_cors import cross_origin
 # Expetions for sqlaclemy
 from sqlalchemy.exc import IntegrityError
 #importing table class and the db conection
@@ -50,6 +51,7 @@ def register():
 
 
 @auth.route('/login', methods=['POST'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
 def login():
     try:
         email = request.json.get('email', None)
