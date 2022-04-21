@@ -13,11 +13,15 @@ from sqlalchemy.exc import IntegrityError
 from databaseApi.models import User
 from databaseApi import db
 
+
+
+
 auth = Blueprint('auth', __name__)
 chave_registro = "!@keyprojetacs"
 
 
 @auth.route('/register', methods=['POST'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
 def register():
     try:
         email = request.json.get('email', None)

@@ -8,6 +8,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 
 @app.route('/')
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
 def Index():
     return render_template('index.html')
 
