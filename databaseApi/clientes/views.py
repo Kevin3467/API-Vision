@@ -52,7 +52,7 @@ def CriaCliente():
             )
         db.session.add(newcliente)
         db.session.commit()
-        return gera_response(201, "cliente", newcliente.to_json(), "Criado com sucesso")
+        return gera_response(201, newcliente.to_json(), "Criado com sucesso")
     except Exception as e:
         print('Erro', e)
         return gera_response(400, {}, "Erro ao cadastrar")
@@ -100,7 +100,7 @@ def deleta_cliente(id):
     try:
         db.session.delete(cliente_objeto)
         db.session.commit()
-        return gera_response(200, "cliente", cliente_objeto.to_json(), "Deletado com sucesso")
+        return gera_response(200, cliente_objeto.to_json(), "Deletado com sucesso")
     except Exception as e:
         print('Erro', e)
         return gera_response(400, {}, "Erro ao deletar")

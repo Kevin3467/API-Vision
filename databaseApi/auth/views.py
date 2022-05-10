@@ -12,6 +12,7 @@ from sqlalchemy.exc import IntegrityError
 #importing table class and the db conection
 from databaseApi.models import User
 from databaseApi import db
+from databaseApi.main import gera_response
 
 
 
@@ -24,11 +25,18 @@ chave_registro = "!@keyprojetacs"
 @cross_origin(origin='*',headers=['Content-Type','Authorization'])
 def register():
     try:
-        email = request.json.get('email', None)
+        username = request.json.get('username', None)
         password = request.json.get('password', None)
+        user_type = request.json.get('user_type', None)
+        cargo = request.json.get('cargo', None)
+
         key = request.json.get('key', None)
         
-        if not email:
+        if not username:
+            return 'Missing email', 400
+        if not user_type:
+            return 'Missing email', 400
+        if not cargo:
             return 'Missing email', 400
         if not password:
             return 'Missing password', 400
@@ -40,12 +48,12 @@ def register():
         
         hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
-        user = User(email=email, hash=hashed)
+        user = User(username=username, hash=hashed,usertype=user_type,cargo=cargo)
         db.session.add(user)
         db.session.commit()
 
-        access_token = create_access_token(identity={"email": email})
-        return {"access_token": access_token}, 200
+        
+        return "Usuario criado com sucesso", 200
     except IntegrityError:
         # the rollback func reverts the changes made to the db ( so if an error happens after we commited changes they will be reverted )
         db.session.rollback()
@@ -58,31 +66,38 @@ def register():
 @cross_origin(origin='*',headers=['Content-Type','Authorization'])
 def login():
     try:
-        email = request.json.get('email', None)
+        username = request.json.get('username', None)
         password = request.json.get('password', None)
         
-        if not email:
-            return 'Missing email', 400
+        if not username:
+            return 'Missing username', 400
         if not password:
             return 'Missing password', 400
         
-        user = User.query.filter_by(email=email).first()
+        user = User.query.filter_by(username=username).first()
         if not user:
             return 'User Not Found!', 404
         
 
         if bcrypt.checkpw(password.encode('utf-8'), user.hash):
-            access_token = create_access_token(identity={"email": email})
+            access_token = create_access_token(identity={"username": username})
             return {"access_token": access_token}, 200
         else:
             return 'Invalid Login Info!', 400
     except AttributeError:
         return 'Provide an Email and Password in JSON format in the request body', 400
 
+
+
+
 # protected test route
-@auth.route('/test', methods=['GET'])
+@auth.route('/user', methods=['GET'])
 @jwt_required()
-def test():
-    user = get_jwt_identity()
-    email = user['email']
-    return f'Welcome to the protected route {email}!', 200
+def CurrentUser():
+
+    user_identity = get_jwt_identity()
+    username = user_identity['username']
+    user_obj = User.query.filter_by(username=username).first()
+    user_json = user_obj.to_json()
+
+    return gera_response(200, user_json)

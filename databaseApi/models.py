@@ -5,9 +5,18 @@ from databaseApi import db
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    email = db.Column(db.Text, unique=True, nullable=False)
+    username = db.Column(db.Text, unique=True, nullable=False)
     hash = db.Column(db.Text, nullable=False)
+    cargo = db.Column(db.Text, nullable=False)
+    usertype = db.Column(db.Text, nullable=False)
 
+    def to_json(self):
+        return {
+        'id': self.id,
+        'username': self.username,
+        'cargo': self.cargo,
+        'usertype': self.usertype
+        }
 
 class Ctrl_contrato(db.Model):
     __tablename__ = 'contrato'
