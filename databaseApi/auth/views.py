@@ -92,6 +92,7 @@ def login():
 
 # protected test route
 @auth.route('/user', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
 @jwt_required()
 def CurrentUser():
 
