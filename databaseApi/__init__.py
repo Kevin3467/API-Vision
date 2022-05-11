@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import (JWTManager)
+from datetime import timedelta
 
 
 app = Flask(__name__, template_folder='.')
@@ -9,6 +10,8 @@ db = SQLAlchemy(app)
 #db local para debug
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['JWT_SECRET_KEY'] = '!0projetacsVision'
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(days=2)
+app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=2)
 jwt = JWTManager(app)
 
 
