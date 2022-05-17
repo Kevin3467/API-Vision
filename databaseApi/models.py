@@ -123,6 +123,7 @@ class Ctrl_chamados(db.Model):
     chmDescricao = db.Column(db.String(255), nullable = False)
     idClientes = db.Column(db.Integer, db.ForeignKey('clientes.id'))
     idCoordenador = db.Column(db.Integer, db.ForeignKey('coordenadores.id'))
+    chmEntrada = db.Column(db.String(14))
     chmVisita = db.Column(db.String(14))
     chmEmissão = db.Column(db.String(14))
     chmAprovação = db.Column(db.String(14))

@@ -1,5 +1,4 @@
 from flask import Response, request, Blueprint
-import json
 from databaseApi import clientes, db
 from databaseApi.main import gera_response
 from databaseApi.models import Ctrl_clientes
