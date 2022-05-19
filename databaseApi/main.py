@@ -13,7 +13,11 @@ def Index():
     return render_template('index.html')
 
 
-
+def Tupple_to_json(obj,json,coltitle):
+    OrcNum = len(obj)
+    for item in range(OrcNum):
+        dict_ = dict(zip(coltitle, obj[item]))
+        json.append(dict_)
 
 
 def gera_response(status, conteudo, mensagem=False):
