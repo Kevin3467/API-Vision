@@ -15,7 +15,7 @@ orcamento = Blueprint('orcamento', __name__)
 def Orcamento():
 
     orcamento_obj = db.session.query(
-        Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id,
+        Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
         Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
         ).filter(
         Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
@@ -23,7 +23,7 @@ def Orcamento():
         Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id
         ).all()
     orcamento_json = []
-    colunas = ('Nome','Descrição','Codigo','id','dataEntrada','contrato','Coordenador','empresa')
+    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa')
     Tupple_to_json(orcamento_obj,orcamento_json,colunas)
 
     return gera_response(200, orcamento_json)
