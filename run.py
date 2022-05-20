@@ -1,4 +1,3 @@
-from sqlalchemy import true
 from databaseApi import app
 import os
 

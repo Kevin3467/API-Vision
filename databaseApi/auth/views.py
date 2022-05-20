@@ -68,7 +68,6 @@ def login():
     try:
         username = request.json.get('username', None)
         password = request.json.get('password', None)
-        
         if not username:
             return 'Missing username', 400
         if not password:
@@ -77,7 +76,6 @@ def login():
         user = User.query.filter_by(username=username).first()
         if not user:
             return 'User Not Found!', 404
-        
 
         if bcrypt.checkpw(password.encode('utf-8'), user.hash):
             access_token = create_access_token(identity={"username": username})

@@ -6,7 +6,7 @@ from databaseApi import db
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.Text, unique=True, nullable=False)
-    hash = db.Column(db.Text, nullable=False)
+    hash = db.Column(db.LargeBinary, nullable=False)
     cargo = db.Column(db.Text, nullable=False)
     usertype = db.Column(db.Text, nullable=False)
 
