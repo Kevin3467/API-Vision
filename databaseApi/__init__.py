@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import (JWTManager)
 from datetime import timedelta
-
+from flask_migrate import Migrate
 
 app = Flask(__name__, template_folder='.')
 db = SQLAlchemy(app)
@@ -13,7 +13,7 @@ app.config['JWT_SECRET_KEY'] = '!0projetacsVision'
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(days=2)
 app.config["JWT_REFRESH_TOKEN_EXPIRES"] = timedelta(days=2)
 jwt = JWTManager(app)
-
+migrate = Migrate(app,db)
 
 from databaseApi.clientes.views import clientes
 app.register_blueprint(clientes)
