@@ -27,3 +27,500 @@ def Orcamento():
     Tupple_to_json(orcamento_obj,orcamento_json,colunas)
 
     return gera_response(200, orcamento_json)
+#
+#
+#
+# todos os filtros do porto Ferrovia
+#
+#
+#
+@orcamento.route('/read/orcamentos/portof/pendente', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@jwt_required()
+def Orcamento_filtro_PF_pendente():
+
+    orcamento_obj = db.session.query(
+        Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
+        Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
+        ).filter(
+        Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
+        Ctrl_chamados.idcnt == Ctrl_contrato.id,
+        Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
+        Ctrl_contrato.cntNome == 'porto Ferrovia',
+        Ctrl_orcamentos.orcstatus == 'pendente'
+        ).all()
+    orcamento_json = []
+    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa')
+    Tupple_to_json(orcamento_obj,orcamento_json,colunas)
+
+    return gera_response(200, orcamento_json)
+
+
+
+
+@orcamento.route('/read/orcamentos/portof/aguardando', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@jwt_required()
+def Orcamento_filtro_PF_aguardando():
+
+    orcamento_obj = db.session.query(
+        Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
+        Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
+        ).filter(
+        Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
+        Ctrl_chamados.idcnt == Ctrl_contrato.id,
+        Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
+        Ctrl_contrato.cntNome == 'porto Ferrovia',
+        Ctrl_orcamentos.orcstatus == 'aguardando'
+        ).all()
+    orcamento_json = []
+    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa')
+    Tupple_to_json(orcamento_obj,orcamento_json,colunas)
+
+    return gera_response(200, orcamento_json)
+
+
+
+
+@orcamento.route('/read/orcamentos/portof/liberado', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@jwt_required()
+def Orcamento_filtro_PF_liberado():
+
+    orcamento_obj = db.session.query(
+        Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
+        Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
+        ).filter(
+        Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
+        Ctrl_chamados.idcnt == Ctrl_contrato.id,
+        Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
+        Ctrl_contrato.cntNome == 'porto Ferrovia',
+        Ctrl_orcamentos.orcstatus == 'liberado'
+        ).all()
+    orcamento_json = []
+    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa')
+    Tupple_to_json(orcamento_obj,orcamento_json,colunas)
+
+    return gera_response(200, orcamento_json)
+
+
+
+
+@orcamento.route('/read/orcamentos/portof/cancelado', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@jwt_required()
+def Orcamento_filtro_PF_cancelado():
+
+    orcamento_obj = db.session.query(
+        Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
+        Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
+        ).filter(
+        Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
+        Ctrl_chamados.idcnt == Ctrl_contrato.id,
+        Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
+        Ctrl_contrato.cntNome == 'porto Ferrovia',
+        Ctrl_orcamentos.orcstatus == 'cancelado'
+        ).all()
+    orcamento_json = []
+    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa')
+    Tupple_to_json(orcamento_obj,orcamento_json,colunas)
+
+    return gera_response(200, orcamento_json)
+    
+#
+#
+#
+# todos os filtros do porto manutenção
+#
+#
+#
+@orcamento.route('/read/orcamentos/portom/pendente', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@jwt_required()
+def Orcamento_filtro_PM_pendente():
+
+    orcamento_obj = db.session.query(
+        Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
+        Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
+        ).filter(
+        Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
+        Ctrl_chamados.idcnt == Ctrl_contrato.id,
+        Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
+        Ctrl_contrato.cntNome == 'porto manutenção',
+        Ctrl_orcamentos.orcstatus == 'pendente'
+        ).all()
+    orcamento_json = []
+    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa')
+    Tupple_to_json(orcamento_obj,orcamento_json,colunas)
+
+    return gera_response(200, orcamento_json)
+
+
+
+
+@orcamento.route('/read/orcamentos/portom/aguardando', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@jwt_required()
+def Orcamento_filtro_PM_aguardando():
+
+    orcamento_obj = db.session.query(
+        Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
+        Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
+        ).filter(
+        Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
+        Ctrl_chamados.idcnt == Ctrl_contrato.id,
+        Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
+        Ctrl_contrato.cntNome == 'porto manutenção',
+        Ctrl_orcamentos.orcstatus == 'aguardando'
+        ).all()
+    orcamento_json = []
+    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa')
+    Tupple_to_json(orcamento_obj,orcamento_json,colunas)
+
+    return gera_response(200, orcamento_json)
+
+
+
+
+@orcamento.route('/read/orcamentos/portom/liberado', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@jwt_required()
+def Orcamento_filtro_PM_liberado():
+
+    orcamento_obj = db.session.query(
+        Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
+        Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
+        ).filter(
+        Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
+        Ctrl_chamados.idcnt == Ctrl_contrato.id,
+        Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
+        Ctrl_contrato.cntNome == 'porto manutenção',
+        Ctrl_orcamentos.orcstatus == 'liberado'
+        ).all()
+    orcamento_json = []
+    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa')
+    Tupple_to_json(orcamento_obj,orcamento_json,colunas)
+
+    return gera_response(200, orcamento_json)
+
+
+
+
+@orcamento.route('/read/orcamentos/portom/cancelado', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@jwt_required()
+def Orcamento_filtro_PM_cancelado():
+
+    orcamento_obj = db.session.query(
+        Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
+        Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
+        ).filter(
+        Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
+        Ctrl_chamados.idcnt == Ctrl_contrato.id,
+        Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
+        Ctrl_contrato.cntNome == 'porto manutenção',
+        Ctrl_orcamentos.orcstatus == 'cancelado'
+        ).all()
+    orcamento_json = []
+    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa')
+    Tupple_to_json(orcamento_obj,orcamento_json,colunas)
+
+    return gera_response(200, orcamento_json)
+#
+#
+#
+#
+# todos os filtros do facilities
+#
+#
+#
+@orcamento.route('/read/orcamentos/facilities/pendente', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@jwt_required()
+def Orcamento_filtro_facilities_pendente():
+
+    orcamento_obj = db.session.query(
+        Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
+        Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
+        ).filter(
+        Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
+        Ctrl_chamados.idcnt == Ctrl_contrato.id,
+        Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
+        Ctrl_contrato.cntNome == 'facilities',
+        Ctrl_orcamentos.orcstatus == 'pendente'
+        ).all()
+    orcamento_json = []
+    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa')
+    Tupple_to_json(orcamento_obj,orcamento_json,colunas)
+
+    return gera_response(200, orcamento_json)
+
+
+
+
+@orcamento.route('/read/orcamentos/facilities/aguardando', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@jwt_required()
+def Orcamento_filtro_facilities_aguardando():
+
+    orcamento_obj = db.session.query(
+        Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
+        Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
+        ).filter(
+        Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
+        Ctrl_chamados.idcnt == Ctrl_contrato.id,
+        Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
+        Ctrl_contrato.cntNome == 'facilities',
+        Ctrl_orcamentos.orcstatus == 'aguardando'
+        ).all()
+    orcamento_json = []
+    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa')
+    Tupple_to_json(orcamento_obj,orcamento_json,colunas)
+
+    return gera_response(200, orcamento_json)
+
+
+
+
+@orcamento.route('/read/orcamentos/facilities/liberado', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@jwt_required()
+def Orcamento_filtro_facilities_liberado():
+
+    orcamento_obj = db.session.query(
+        Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
+        Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
+        ).filter(
+        Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
+        Ctrl_chamados.idcnt == Ctrl_contrato.id,
+        Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
+        Ctrl_contrato.cntNome == 'facilities',
+        Ctrl_orcamentos.orcstatus == 'liberado'
+        ).all()
+    orcamento_json = []
+    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa')
+    Tupple_to_json(orcamento_obj,orcamento_json,colunas)
+
+    return gera_response(200, orcamento_json)
+
+
+
+
+@orcamento.route('/read/orcamentos/facilities/cancelado', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@jwt_required()
+def Orcamento_filtro_facilities_cancelado():
+
+    orcamento_obj = db.session.query(
+        Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
+        Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
+        ).filter(
+        Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
+        Ctrl_chamados.idcnt == Ctrl_contrato.id,
+        Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
+        Ctrl_contrato.cntNome == 'facilities',
+        Ctrl_orcamentos.orcstatus == 'cancelado'
+        ).all()
+    orcamento_json = []
+    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa')
+    Tupple_to_json(orcamento_obj,orcamento_json,colunas)
+
+    return gera_response(200, orcamento_json)
+#
+#
+#
+# todos os filtros do bmsa
+#
+#
+#
+@orcamento.route('/read/orcamentos/bmsa/pendente', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@jwt_required()
+def Orcamento_filtro_bmsa_pendente():
+
+    orcamento_obj = db.session.query(
+        Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
+        Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
+        ).filter(
+        Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
+        Ctrl_chamados.idcnt == Ctrl_contrato.id,
+        Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
+        Ctrl_contrato.cntNome == 'Engenharia Industrial(bmsa)',
+        Ctrl_orcamentos.orcstatus == 'pendente'
+        ).all()
+    orcamento_json = []
+    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa')
+    Tupple_to_json(orcamento_obj,orcamento_json,colunas)
+
+    return gera_response(200, orcamento_json)
+
+
+
+
+@orcamento.route('/read/orcamentos/bmsa/aguardando', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@jwt_required()
+def Orcamento_filtro_bmsa_aguardando():
+
+    orcamento_obj = db.session.query(
+        Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
+        Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
+        ).filter(
+        Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
+        Ctrl_chamados.idcnt == Ctrl_contrato.id,
+        Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
+        Ctrl_contrato.cntNome == 'Engenharia Industrial(bmsa)',
+        Ctrl_orcamentos.orcstatus == 'aguardando'
+        ).all()
+    orcamento_json = []
+    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa')
+    Tupple_to_json(orcamento_obj,orcamento_json,colunas)
+
+    return gera_response(200, orcamento_json)
+
+
+
+
+@orcamento.route('/read/orcamentos/bmsa/liberado', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@jwt_required()
+def Orcamento_filtro_bmsa_liberado():
+
+    orcamento_obj = db.session.query(
+        Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
+        Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
+        ).filter(
+        Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
+        Ctrl_chamados.idcnt == Ctrl_contrato.id,
+        Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
+        Ctrl_contrato.cntNome == 'Engenharia Industrial(bmsa)',
+        Ctrl_orcamentos.orcstatus == 'liberado'
+        ).all()
+    orcamento_json = []
+    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa')
+    Tupple_to_json(orcamento_obj,orcamento_json,colunas)
+
+    return gera_response(200, orcamento_json)
+
+
+
+
+@orcamento.route('/read/orcamentos/bmsa/cancelado', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@jwt_required()
+def Orcamento_filtro_bmsa_cancelado():
+
+    orcamento_obj = db.session.query(
+        Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
+        Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
+        ).filter(
+        Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
+        Ctrl_chamados.idcnt == Ctrl_contrato.id,
+        Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
+        Ctrl_contrato.cntNome == 'Engenharia Industrial(bmsa)',
+        Ctrl_orcamentos.orcstatus == 'cancelado'
+        ).all()
+    orcamento_json = []
+    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa')
+    Tupple_to_json(orcamento_obj,orcamento_json,colunas)
+
+    return gera_response(200, orcamento_json)
+#
+#
+#
+# todos os filtros do sudeste
+#
+#
+#
+@orcamento.route('/read/orcamentos/sudeste/pendente', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@jwt_required()
+def Orcamento_filtro_sudeste_pendente():
+
+    orcamento_obj = db.session.query(
+        Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
+        Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
+        ).filter(
+        Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
+        Ctrl_chamados.idcnt == Ctrl_contrato.id,
+        Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
+        Ctrl_contrato.cntNome == 'Engenharia Industrial(sudeste)',
+        Ctrl_orcamentos.orcstatus == 'pendente'
+        ).all()
+    orcamento_json = []
+    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa')
+    Tupple_to_json(orcamento_obj,orcamento_json,colunas)
+
+    return gera_response(200, orcamento_json)
+
+
+
+
+@orcamento.route('/read/orcamentos/sudeste/aguardando', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@jwt_required()
+def Orcamento_filtro_sudeste_aguardando():
+
+    orcamento_obj = db.session.query(
+        Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
+        Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
+        ).filter(
+        Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
+        Ctrl_chamados.idcnt == Ctrl_contrato.id,
+        Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
+        Ctrl_contrato.cntNome == 'Engenharia Industrial(sudeste)',
+        Ctrl_orcamentos.orcstatus == 'aguardando'
+        ).all()
+    orcamento_json = []
+    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa')
+    Tupple_to_json(orcamento_obj,orcamento_json,colunas)
+
+    return gera_response(200, orcamento_json)
+
+
+
+
+@orcamento.route('/read/orcamentos/sudeste/liberado', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@jwt_required()
+def Orcamento_filtro_sudeste_liberado():
+
+    orcamento_obj = db.session.query(
+        Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
+        Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
+        ).filter(
+        Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
+        Ctrl_chamados.idcnt == Ctrl_contrato.id,
+        Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
+        Ctrl_contrato.cntNome == 'Engenharia Industrial(sudeste)',
+        Ctrl_orcamentos.orcstatus == 'liberado'
+        ).all()
+    orcamento_json = []
+    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa')
+    Tupple_to_json(orcamento_obj,orcamento_json,colunas)
+
+    return gera_response(200, orcamento_json)
+
+
+
+
+@orcamento.route('/read/orcamentos/sudeste/cancelado', methods=['GET'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@jwt_required()
+def Orcamento_filtro_sudeste_cancelado():
+
+    orcamento_obj = db.session.query(
+        Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
+        Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
+        ).filter(
+        Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
+        Ctrl_chamados.idcnt == Ctrl_contrato.id,
+        Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
+        Ctrl_contrato.cntNome == 'Engenharia Industrial(sudeste)',
+        Ctrl_orcamentos.orcstatus == 'cancelado'
+        ).all()
+    orcamento_json = []
+    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa')
+    Tupple_to_json(orcamento_obj,orcamento_json,colunas)
+
+    return gera_response(200, orcamento_json)
