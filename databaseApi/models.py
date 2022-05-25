@@ -23,12 +23,12 @@ class Ctrl_contrato(db.Model):
 
 
     id = db.Column(db.Integer, primary_key = True, autoincrement=True )
-    cntCodigo = db.Column(db.String(80), nullable = False )
-    cntNome = db.Column(db.String(80), nullable = False )
+    cntCodigo = db.Column(db.Text, nullable = False )
+    cntNome = db.Column(db.Text, nullable = False )
     cntValor = db.Column(db.Integer, nullable = False)
-    cntGestor = db.Column(db.String(80), nullable = False)
-    cntDataInicio = db.Column(db.String(14), nullable = False)
-    cntDataFim = db.Column(db.String(14), nullable = False)
+    cntGestor = db.Column(db.Text, nullable = False)
+    cntDataInicio = db.Column(db.Text, nullable = False)
+    cntDataFim = db.Column(db.Text, nullable = False)
 
 
     chamados = db.relationship('Ctrl_chamados')
@@ -52,10 +52,10 @@ class Ctrl_clientes(db.Model):
 
 
     id = db.Column(db.Integer, primary_key = True, autoincrement=True )
-    clnNome = db.Column(db.String(80), nullable = False )
-    clnEmpresa = db.Column(db.String(80), nullable = False )
-    clnTelefone = db.Column(db.String(80))
-    clnEmail = db.Column(db.String(255))
+    clnNome = db.Column(db.Text, nullable = False )
+    clnEmpresa = db.Column(db.Text, nullable = False )
+    clnTelefone = db.Column(db.Text)
+    clnEmail = db.Column(db.Text)
 
     chamados = db.relationship('Ctrl_chamados')
     
