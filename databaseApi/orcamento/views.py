@@ -371,7 +371,8 @@ def Orcamento_filtro_bmsa_pendente():
 @cross_origin(origin='*',headers=['Content-Type','Authorization'])
 @jwt_required()
 def Orcamento_filtro_bmsa_aguardando():
-
+    salobo = 'Industrial Salobo'
+    sossego = 'Industrial Sossego'
     orcamento_obj = db.session.query(
         Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
         Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
@@ -379,7 +380,7 @@ def Orcamento_filtro_bmsa_aguardando():
         Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
         Ctrl_chamados.idcnt == Ctrl_contrato.id,
         Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
-        Ctrl_contrato.cntNome == 'Engenharia Industrial(bmsa)',
+        or_(Ctrl_contrato.cntNome == salobo, Ctrl_contrato.cntNome == sossego),
         Ctrl_orcamentos.orcstatus == 'aguardando'
         ).all()
     orcamento_json = []
@@ -395,7 +396,8 @@ def Orcamento_filtro_bmsa_aguardando():
 @cross_origin(origin='*',headers=['Content-Type','Authorization'])
 @jwt_required()
 def Orcamento_filtro_bmsa_liberado():
-
+    salobo = 'Industrial Salobo'
+    sossego = 'Industrial Sossego'
     orcamento_obj = db.session.query(
         Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
         Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
@@ -403,7 +405,7 @@ def Orcamento_filtro_bmsa_liberado():
         Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
         Ctrl_chamados.idcnt == Ctrl_contrato.id,
         Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
-        Ctrl_contrato.cntNome == 'Engenharia Industrial(bmsa)',
+        or_(Ctrl_contrato.cntNome == salobo, Ctrl_contrato.cntNome == sossego),
         Ctrl_orcamentos.orcstatus == 'liberado'
         ).all()
     orcamento_json = []
@@ -419,7 +421,8 @@ def Orcamento_filtro_bmsa_liberado():
 @cross_origin(origin='*',headers=['Content-Type','Authorization'])
 @jwt_required()
 def Orcamento_filtro_bmsa_cancelado():
-
+    salobo = 'Industrial Salobo'
+    sossego = 'Industrial Sossego'
     orcamento_obj = db.session.query(
         Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
         Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
@@ -427,7 +430,7 @@ def Orcamento_filtro_bmsa_cancelado():
         Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
         Ctrl_chamados.idcnt == Ctrl_contrato.id,
         Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
-        Ctrl_contrato.cntNome == 'Engenharia Industrial(bmsa)',
+        or_(Ctrl_contrato.cntNome == salobo, Ctrl_contrato.cntNome == sossego),
         Ctrl_orcamentos.orcstatus == 'cancelado'
         ).all()
     orcamento_json = []
