@@ -6,7 +6,7 @@ from sqlalchemy import or_
 from flask_jwt_extended import jwt_required
 
 orcamento = Blueprint('orcamento', __name__)
-    
+
 
     
 

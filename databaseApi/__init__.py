@@ -23,5 +23,7 @@ from databaseApi.escopo.views import escopo
 app.register_blueprint(escopo)
 from databaseApi.orcamento.views import orcamento
 app.register_blueprint(orcamento)
+from databaseApi.chamados.views import chamados
+app.register_blueprint(chamados)
 
 
