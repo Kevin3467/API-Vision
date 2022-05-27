@@ -1,4 +1,5 @@
-from flask import Blueprint
+from turtle import title
+from flask import Blueprint, request
 from databaseApi import db
 from databaseApi.main import gera_response, cross_origin, Tupple_to_json
 from databaseApi.models import Ctrl_chamados,Ctrl_contrato
@@ -49,3 +50,45 @@ def Chamados_bmsa():
     
 
     return gera_response(200, Chamados_json)
+
+
+
+
+
+@chamados.route('/create/chamados', methods=['POST'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@jwt_required()
+def create_chamados():
+        cntid = request.json.get('cntid', None)
+        slct = request.json.get('slct', None)
+        desc = request.json.get('desc', None)
+        cltid = request.json.get('cltid', None)
+        crdid = request.json.get('crdid', None)
+        title = request.json.get('title', None)
+        
+        if not cntid:
+            return 'Missing cntid', 400
+        if not slct:
+            return 'Missing slct', 400
+        if not desc:
+            return 'Missing desc', 400
+        if not cltid:
+            return 'Missing cltid', 400
+        if not crdid:
+            return 'Missing crdid', 400
+        if not title:
+            return 'Missing title', 400
+
+
+        newChamado = Ctrl_chamados(
+            idcnt=cntid,
+            chmSolicitacao=slct,
+            chmDescricao=desc,
+            idClientes=cltid,
+            idCoordenador=crdid,
+            chmTitulo=title
+            )
+        db.session.add(newChamado)
+        db.session.commit()
+
+        return "chamado criado com sucesso", 200

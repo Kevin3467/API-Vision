@@ -537,3 +537,8 @@ def Orcamento_filtro_sudeste_cancelado():
     Tupple_to_json(orcamento_obj,orcamento_json,colunas)
 
     return gera_response(200, orcamento_json)
+
+
+
+
+
