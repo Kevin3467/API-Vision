@@ -40,7 +40,7 @@ def Chamados_bmsa():
         Ctrl_chamados.id, Ctrl_contrato.id, Ctrl_chamados.chmTitulo
         ).filter(
         Ctrl_chamados.idcnt == Ctrl_contrato.id,
-        or_(Ctrl_contrato.id == 6, Ctrl_contrato.id == 7)
+        or_(Ctrl_contrato.id == 5, Ctrl_contrato.id == 6)
         ).all()
 
     cols_title = ('id','idcnt','Titulo')
