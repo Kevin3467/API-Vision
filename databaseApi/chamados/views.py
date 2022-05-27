@@ -1,4 +1,3 @@
-from turtle import title
 from flask import Blueprint, request
 from databaseApi import db
 from databaseApi.main import gera_response, cross_origin, Tupple_to_json
