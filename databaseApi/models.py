@@ -74,9 +74,9 @@ class Ctrl_orcamentos(db.Model):
 
 
     id = db.Column(db.Integer, primary_key = True, autoincrement=True )
-    orcnome = db.Column(db.String(80), nullable = False )
-    orcdescricao = db.Column(db.String(80), nullable = False )
-    orccodigo = db.Column(db.String(80))
+    orcnome = db.Column(db.Text, nullable = False )
+    orcdescricao = db.Column(db.Text, nullable = False )
+    orccodigo = db.Column(db.Text)
     orcstatus = db.Column(db.Text, nullable = False)
     idchamado = db.Column(db.Integer, db.ForeignKey('chamados.id'))
 

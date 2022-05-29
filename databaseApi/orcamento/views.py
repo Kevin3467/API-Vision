@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request
 from databaseApi import db
 from databaseApi.main import gera_response, cross_origin, Tupple_to_json
 from databaseApi.models import Ctrl_orcamentos, Ctrl_chamados, Ctrl_contrato, Ctrl_coordenadores
@@ -8,7 +8,39 @@ from flask_jwt_extended import jwt_required
 orcamento = Blueprint('orcamento', __name__)
 
 
-    
+@orcamento.route('/create/orcamento', methods=['POST'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@jwt_required()
+def create_orcamento():
+        orcnome = request.json.get('orcnome', None)
+        orcdesc = request.json.get('orcdesc', None)
+        orccod = request.json.get('orccod', None)
+        chmid = request.json.get('chmid', None)
+        orcstatus = request.json.get('orcstatus', None)
+        
+        if not orcnome:
+            return 'Missing orcnome', 400
+        if not orcdesc:
+            return 'Missing orcdesc', 400
+        if not chmid:
+            return 'Missing chmid', 400
+        if not orcstatus:
+            return 'Missing orcstatus', 400
+
+
+        newOrcamento = Ctrl_orcamentos(
+            orcnome=orcnome,
+            orcdescricao=orcdesc,
+            orccodigo=orccod,
+            orcstatus=orcstatus,
+            idchamado=chmid,
+            )
+        db.session.add(newOrcamento)
+        db.session.commit()
+
+        return "Orcamento criado com sucesso", 200
+
+
 
 @orcamento.route('/read/orcamentos', methods=['GET'])
 @cross_origin(origin='*',headers=['Content-Type','Authorization'])
