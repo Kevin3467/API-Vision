@@ -35,12 +35,13 @@ def Chamados(idcnt):
 @cross_origin(origin='*',headers=['Content-Type','Authorization'])
 @jwt_required()
 def Chamados_bmsa():
-    
+    salobo = 5
+    sossego = 6
     Chamados_obj = db.session.query(
         Ctrl_chamados.id, Ctrl_contrato.id, Ctrl_chamados.chmTitulo
         ).filter(
         Ctrl_chamados.idcnt == Ctrl_contrato.id,
-        or_(Ctrl_contrato.id == 5, Ctrl_contrato.id == 6)
+        or_(Ctrl_contrato.id == salobo, Ctrl_contrato.id == sossego)
         ).all()
 
     cols_title = ('id','idcnt','Titulo')
