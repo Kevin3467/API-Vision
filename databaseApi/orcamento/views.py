@@ -49,14 +49,14 @@ def Orcamento():
 
     orcamento_obj = db.session.query(
         Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
-        Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa
+        Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa, Ctrl_orcamentos.orcstatus
         ).filter(
         Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
         Ctrl_chamados.idcnt == Ctrl_contrato.id,
         Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id
         ).all()
     orcamento_json = []
-    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa')
+    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa','status')
     Tupple_to_json(orcamento_obj,orcamento_json,colunas)
 
     return gera_response(200, orcamento_json)
@@ -187,12 +187,13 @@ def Orcamento_filtro_PM_pendente():
         Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
         Ctrl_chamados.idcnt == Ctrl_contrato.id,
         Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
-        Ctrl_contrato.cntNome == 'porto manutenção',
+        Ctrl_contrato.cntNome == 'Porto Manutenção',
         Ctrl_orcamentos.orcstatus == 'pendente'
         ).all()
     orcamento_json = []
     colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa')
     Tupple_to_json(orcamento_obj,orcamento_json,colunas)
+    print(orcamento_obj)
 
     return gera_response(200, orcamento_json)
 
