@@ -30,6 +30,19 @@ def Chamados(idcnt):
     return gera_response(200, Chamados_json)
 
 
+@chamados.route("/chamados/<id>", methods=["DELETE"])
+@jwt_required()
+def deleta_chamados(id):
+    chamados_objeto = Ctrl_chamados.query.filter_by(id=id).first()
+
+    try:
+        db.session.delete(chamados_objeto)
+        db.session.commit()
+        return gera_response(200, chamados_objeto.to_json(), "Deletado com sucesso")
+    except Exception as e:
+        print('Erro', e)
+        return gera_response(400, {}, "Erro ao deletar")
+
 # lista todos os chamados na tabela
 @chamados.route('/read/chamados/bmsa', methods=['GET'])
 @cross_origin(origin='*',headers=['Content-Type','Authorization'])

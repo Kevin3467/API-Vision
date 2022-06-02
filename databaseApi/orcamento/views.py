@@ -8,6 +8,53 @@ from flask_jwt_extended import jwt_required
 orcamento = Blueprint('orcamento', __name__)
 
 
+
+
+
+
+
+@orcamento.route("/orcamento/<id>", methods=["DELETE"])
+@jwt_required()
+def deleta_orcamento(id):
+    orcamento_objeto = Ctrl_orcamentos.query.filter_by(id=id).first()
+
+    try:
+        db.session.delete(orcamento_objeto)
+        db.session.commit()
+        return gera_response(200, orcamento_objeto.to_json(), "Deletado com sucesso")
+    except Exception as e:
+        print('Erro', e)
+        return gera_response(400, {}, "Erro ao deletar")
+
+
+
+
+
+# Atualizar Orçamento
+@orcamento.route("/orcamento/<id>", methods=["PUT"])
+@jwt_required()
+def AtualizaOrcamento(id):
+
+    orcamento_objeto = Ctrl_orcamentos.query.filter_by(id=id).first()
+    body = request.get_json()
+
+    if('orcnome' in body):
+        orcamento_objeto.orcnome = body['orcnome']
+    if('orcdesc' in body):
+        orcamento_objeto.orcdescricao = body['orcdesc']
+    if('orccod' in body):
+        orcamento_objeto.orccodigo = body['orccod']
+    if('orcstatus' in body):
+        orcamento_objeto.orcstatus = body['orcstatus']
+            
+        
+    db.session.add(orcamento_objeto)
+    db.session.commit()
+    return gera_response(200, orcamento_objeto.to_json(), "Atualizado com sucesso")
+
+
+
+
 @orcamento.route('/create/orcamento', methods=['POST'])
 @cross_origin(origin='*',headers=['Content-Type','Authorization'])
 @jwt_required()
