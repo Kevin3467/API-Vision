@@ -151,6 +151,7 @@ class Ctrl_chamados(db.Model):
         'chmAprovação': self.chmAprovação,
         'chmEntrega': self.chmEntrega,
         'chmArquivamento': self.chmArquivamento,
+        'chmStatus': self.chmStatus,
         }
 
 
