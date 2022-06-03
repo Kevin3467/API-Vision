@@ -14,7 +14,7 @@ chamados = Blueprint('chamados', __name__)
 @cross_origin(origin='*',headers=['Content-Type','Authorization'])
 @jwt_required()
 def Chamados(idcnt):
-    
+
     Chamados_obj = db.session.query(
         Ctrl_chamados.id, Ctrl_contrato.id, Ctrl_chamados.chmTitulo
         ).filter(
@@ -42,6 +42,11 @@ def deleta_chamados(id):
     except Exception as e:
         print('Erro', e)
         return gera_response(400, {}, "Erro ao deletar")
+
+
+
+
+
 
 # lista todos os chamados na tabela
 @chamados.route('/read/chamados/bmsa', methods=['GET'])

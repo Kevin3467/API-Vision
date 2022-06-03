@@ -335,7 +335,7 @@ def Orcamento_filtro_facilities_pendente():
         Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
         Ctrl_chamados.idcnt == Ctrl_contrato.id,
         Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
-        Ctrl_contrato.cntNome == 'facilities',
+        Ctrl_contrato.cntNome == 'Facilities',
         Ctrl_orcamentos.orcstatus == 'pendente'
         ).all()
     orcamento_json = []
@@ -359,7 +359,7 @@ def Orcamento_filtro_facilities_aguardando():
         Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
         Ctrl_chamados.idcnt == Ctrl_contrato.id,
         Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
-        Ctrl_contrato.cntNome == 'facilities',
+        Ctrl_contrato.cntNome == 'Facilities',
         Ctrl_orcamentos.orcstatus == 'aguardando'
         ).all()
     orcamento_json = []
@@ -383,7 +383,7 @@ def Orcamento_filtro_facilities_liberado():
         Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
         Ctrl_chamados.idcnt == Ctrl_contrato.id,
         Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
-        Ctrl_contrato.cntNome == 'facilities',
+        Ctrl_contrato.cntNome == 'Facilities',
         Ctrl_orcamentos.orcstatus == 'liberado'
         ).all()
     orcamento_json = []
@@ -407,7 +407,7 @@ def Orcamento_filtro_facilities_cancelado():
         Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
         Ctrl_chamados.idcnt == Ctrl_contrato.id,
         Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
-        Ctrl_contrato.cntNome == 'facilities',
+        Ctrl_contrato.cntNome == 'Facilities',
         Ctrl_orcamentos.orcstatus == 'cancelado'
         ).all()
     orcamento_json = []
