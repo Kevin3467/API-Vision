@@ -19,7 +19,8 @@ def Chamados(idcnt):
         Ctrl_chamados.id, Ctrl_contrato.id, Ctrl_chamados.chmTitulo
         ).filter(
         Ctrl_chamados.idcnt == Ctrl_contrato.id,
-        Ctrl_contrato.id == idcnt
+        Ctrl_contrato.id == idcnt,
+        Ctrl_chamados.chmStatus == 'ativo'
         ).all()
 
     cols_title = ('id','idcnt','Titulo')
@@ -83,6 +84,7 @@ def create_chamados():
         cltid = request.json.get('cltid', None)
         crdid = request.json.get('crdid', None)
         title = request.json.get('title', None)
+        status = request.json.get('status', None)
         
         if not cntid:
             return 'Missing cntid', 400
@@ -96,6 +98,8 @@ def create_chamados():
             return 'Missing crdid', 400
         if not title:
             return 'Missing title', 400
+        if not status:
+            return 'Missing status', 400
 
 
         newChamado = Ctrl_chamados(
@@ -104,7 +108,8 @@ def create_chamados():
             chmDescricao=desc,
             idClientes=cltid,
             idCoordenador=crdid,
-            chmTitulo=title
+            chmTitulo=title,
+            chmStatus=status
             )
         db.session.add(newChamado)
         db.session.commit()
