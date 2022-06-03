@@ -115,3 +115,22 @@ def create_chamados():
         db.session.commit()
 
         return "chamado criado com sucesso", 200
+
+
+
+# Atualizar Orçamento
+@chamados.route("/chamados/<id>", methods=["PUT"])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'])
+@jwt_required()
+def AtualizaChamados(id):
+
+    chamados_objeto = Ctrl_chamados.query.filter_by(id=id).first()
+    body = request.get_json()
+
+    if('status' in body):
+        chamados_objeto.chmStatus = body['status']
+            
+        
+    db.session.add(chamados_objeto)
+    db.session.commit()
+    return gera_response(200, chamados_objeto.to_json(), "Atualizado com sucesso")
