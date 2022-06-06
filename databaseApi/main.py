@@ -3,7 +3,7 @@ from flask import Response, render_template
 import json
 from flask_cors import CORS, cross_origin
 
-cors = CORS(app, resources={r"/foo": {"origins": "http://localhost:port"}})
+cors = CORS(app, resources={r"/foo": {"origins": "*"}})
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
