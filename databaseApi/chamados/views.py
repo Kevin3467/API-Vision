@@ -120,7 +120,7 @@ def create_chamados():
 
 # Atualizar Orçamento
 @chamados.route("/chamados/<id>", methods=["PUT"])
-@cross_origin(origin='*',headers=['Content-Type','Authorization'],methods=['PUT,OPTION'])
+@cross_origin(origin='*',headers=['Content-Type','Authorization'],methods=['PUT,OPTIONS'])
 @jwt_required()
 def AtualizaChamados(id):
 
