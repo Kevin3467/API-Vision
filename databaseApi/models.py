@@ -127,12 +127,12 @@ class Ctrl_chamados(db.Model):
     idClientes = db.Column(db.Integer, db.ForeignKey('clientes.id'))
     idCoordenador = db.Column(db.Integer, db.ForeignKey('coordenadores.id'))
     chmStatus = db.Column(db.Text, nullable = False)
-    chmEntrada = db.Column(db.String(14))
-    chmVisita = db.Column(db.String(14))
-    chmEmissão = db.Column(db.String(14))
-    chmAprovação = db.Column(db.String(14))
-    chmEntrega = db.Column(db.String(14))
-    chmArquivamento = db.Column(db.String(14))
+    chmEntrada = db.Column(db.DateTime)
+    chmVisita = db.Column(db.DateTime)
+    chmEmissão = db.Column(db.DateTime)
+    chmAprovação = db.Column(db.DateTime)
+    chmEntrega = db.Column(db.DateTime)
+    chmArquivamento = db.Column(db.DateTime)
 
 
     escopo = db.relationship('Ctrl_escopo')
