@@ -23,9 +23,9 @@ def Orcamento_id(id):
         Ctrl_orcamentos.id,
         Ctrl_chamados.chmEntrada, 
         Ctrl_contrato.cntNome, 
-        Ctrl_coordenadores.codNome, 
-        Ctrl_coordenadores.codEmpresa, 
+        Ctrl_coordenadores.codNome,
         Ctrl_clientes.clnNome,
+        Ctrl_coordenadores.codEmpresa, 
         Ctrl_orcamentos.orcstatus
         ).filter(
         Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
