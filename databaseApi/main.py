@@ -19,6 +19,10 @@ def Tupple_to_json(obj,json,coltitle):
         dict_ = dict(zip(coltitle, obj[item]))
         json.append(dict_)
 
+def row_to_json(obj,json,coltitle):
+
+        dict_ = dict(zip(coltitle, obj))
+        json.append(dict_)
 
 def gera_response(status, conteudo, mensagem=False):
     body = {}
