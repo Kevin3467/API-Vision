@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from databaseApi import db
 from databaseApi.main import gera_response, cross_origin, Tupple_to_json, row_to_json
-from databaseApi.models import Ctrl_orcamentos, Ctrl_chamados, Ctrl_contrato, Ctrl_coordenadores
+from databaseApi.models import Ctrl_clientes, Ctrl_orcamentos, Ctrl_chamados, Ctrl_contrato, Ctrl_coordenadores
 from sqlalchemy import or_
 from flask_jwt_extended import jwt_required
 
@@ -25,14 +25,16 @@ def Orcamento_id(id):
         Ctrl_contrato.cntNome, 
         Ctrl_coordenadores.codNome, 
         Ctrl_coordenadores.codEmpresa, 
+        Ctrl_clientes.clnNome,
         Ctrl_orcamentos.orcstatus
         ).filter(
         Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
         Ctrl_chamados.idcnt == Ctrl_contrato.id,
         Ctrl_chamados.idCoordenador == Ctrl_coordenadores.id,
+        Ctrl_chamados.idClientes == Ctrl_clientes.id,
         Ctrl_orcamentos.id == id
         ).first()
-    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','empresa','status')
+    colunas = ('Nome','Descrição','Codigo','idchamado','idcontrato','id','dataEntrada','contrato','Coordenador','Cliente','empresa','status')
     orcamento_json = []
     row_to_json(orcamento_obj,orcamento_json, colunas)
     print(orcamento_json)
