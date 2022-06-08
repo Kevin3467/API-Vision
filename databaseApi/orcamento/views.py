@@ -15,8 +15,17 @@ orcamento = Blueprint('orcamento', __name__)
 def Orcamento_id(id):
 
     orcamento_obj = db.session.query(
-        Ctrl_orcamentos.orcnome, Ctrl_orcamentos.orcdescricao, Ctrl_orcamentos.orccodigo, Ctrl_chamados.id, Ctrl_contrato.id,Ctrl_orcamentos.id,
-        Ctrl_chamados.chmEntrada, Ctrl_contrato.cntNome, Ctrl_coordenadores.codNome, Ctrl_coordenadores.codEmpresa, Ctrl_orcamentos.orcstatus
+        Ctrl_orcamentos.orcnome,
+        Ctrl_orcamentos.orcdescricao,
+        Ctrl_orcamentos.orccodigo, 
+        Ctrl_chamados.id, 
+        Ctrl_contrato.id,
+        Ctrl_orcamentos.id,
+        Ctrl_chamados.chmEntrada, 
+        Ctrl_contrato.cntNome, 
+        Ctrl_coordenadores.codNome, 
+        Ctrl_coordenadores.codEmpresa, 
+        Ctrl_orcamentos.orcstatus
         ).filter(
         Ctrl_orcamentos.idchamado == Ctrl_chamados.id,
         Ctrl_chamados.idcnt == Ctrl_contrato.id,
